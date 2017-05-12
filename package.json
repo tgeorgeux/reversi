@@ -1,0 +1,26 @@
+{
+  "name": "reversi",
+  "version": "1.0.0",
+  "description": "This is the game of reversi. As developed for MHCID IN4MATX 285.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tgeorgeux/reversi.git"
+  },
+  "keywords": [
+    "Reversi"
+  ],
+  "author": "Timothy S. George",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tgeorgeux/reversi/issues"
+  },
+  "homepage": "https://github.com/tgeorgeux/reversi#readme",
+  "dependencies": {
+    "node-static": "^0.7.9",
+    "socket.io": "^2.0.1"
+  }
+}
