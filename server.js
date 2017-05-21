@@ -101,7 +101,7 @@ io.sockets.on('connection', function (socket) {
                                           message: error_message
                                         });
       return;
-    };
+    }
     socket.join(room);
     var roomObject = io.sockets.adapter.rooms[room];
     if('undefined' === typeof roomObject || !roomObject){
