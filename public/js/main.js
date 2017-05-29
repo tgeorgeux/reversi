@@ -104,7 +104,7 @@ socket.on('player_disconnected',function(payload){
   /* If someone left the room, animate out all their content */
   var dom_elements = $('.socket_'+payload.socket_id);
   /* If we don't already have an entry for this person */
-  if (dom_elements.length == 0){
+  if (dom_elements.length !== 0){
     $('dom_elements').slideUp(1000);
   }
 
