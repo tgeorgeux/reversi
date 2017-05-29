@@ -41,7 +41,7 @@ var io = require('socket.io').listen(app);
 
 io.sockets.on('connection', function (socket) {
 
-  log('Client connectio by '+socket.id);
+  log('Client connection by '+socket.id);
 
   function log(){
     var array = ['*** Server log message: '];
@@ -64,7 +64,7 @@ io.sockets.on('connection', function (socket) {
   /*    'result': 'success'
   /*    'room': room to join,
   /*    'username': username of person joining room
-  /*    'socket_id of the person that joined.'
+  /*    'socket_id: the person that joined.'
   /*    'membership': number of people in the new room including the new one.
   /*  }
   /*  or
@@ -99,7 +99,7 @@ io.sockets.on('connection', function (socket) {
       return;
     }
 
-
+    /* Check that username has been provided */
     var username = payload.username;
     if('undefined' === typeof username || !username){
       var error_message = 'join_room didn\'t specify a username, command aborted';
@@ -123,22 +123,23 @@ io.sockets.on('connection', function (socket) {
     var roomObject = io.sockets.adapter.rooms[room];
 
     /* Tell everyone already in the room that someone just joined */
-    var numberOfClients = roomObject.length;
-    var successData = {
+    var numClients = roomObject.length;
+    var success_data = {
                         result: 'success',
                         room: room,
                         username: username,
                         socket_id: socket.id,
-                        membership: (numberOfClients + 1)
+                        membership: numClients
                       }
-    io.in(room).emit('join_room_response',successData);
+    io.in(room).emit('join_room_response',success_data);
 
     for(var socket_in_room in roomObject.sockets) {
       var success_data = {
                         result: 'success',
                         room: room,
-                        unsername: players[socket_in_room].username,
-                        membership: numberOfClients
+                        username: players[socket_in_room].username,
+                        socket_id: socket_in_room,
+                        membership: numClients
                       };
       socket.emit('join_room_response', success_data);
     }
@@ -148,8 +149,8 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('disconnect',function(){
     log('Client disconnected '+JSON.stringify(players[socket.id]));
-    if('undefined' != typeof players[socket.id] && players[socket.id]) {
-      var unsername = players[socket.id].username;
+    if('undefined' !== typeof players[socket.id] && players[socket.id]) {
+      var username = players[socket.id].username;
       var room = players[socket.id].room;
       var payload = {
                       username: username,
