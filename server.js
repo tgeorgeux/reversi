@@ -202,7 +202,7 @@ io.sockets.on('connection', function (socket) {
   			return;
   		}
 
-  		var username = players[socked.id].username;
+  		var username = players[socket.id].username;
   		if(('undefined' === typeof username) || !username){
   			var error_message = 'send_message did not specify a username, command aborted';
   			log(error_message);
@@ -496,7 +496,7 @@ io.sockets.on('connection', function (socket) {
       var game_id = Math.floor((1+Math.random()) *0x10000).toString(16).substring(1);
       var success_data = {
                   result: 'success',
-                  socket_id: socked.id,
+                  socket_id: requested_user,
                   game_id: game_id
                 };
       socket.emit('game_start_response', success_data);
@@ -507,9 +507,9 @@ io.sockets.on('connection', function (socket) {
                   socket_id: socket.id,
                   game_id: game_id
                 };
-      socket.to(requested_user).emit('uninvited', success_data);
+      socket.to(requested_user).emit('game_start_response', success_data);
 
-      log('game_start  succesful');
+      log('game_start succesful');
   });
 
 

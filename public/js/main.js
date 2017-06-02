@@ -165,6 +165,7 @@ socket.on('uninvite_response',function(payload){
 
 /* Send game_start message to server */
 function game_start(who){
+  console.log('game attempting to start');
   var payload = {};
   payload.requested_user = who;
   console.log('*** Client log message: \'game_start\' payload: '+JSON.stringify(payload));
@@ -240,14 +241,15 @@ function makeInvitedButton(socket_id){
   return(newNode);
 }
 
-/* Generate the invited button */
-function makePlayButton(){
+/* Generate the play button */
+function makePlayButton(socket_id){
   var newHTML = '<button type=\'button\' class=\'btn btn-alert\'>Play</button>';
   var newNode = $(newHTML);
-  return(newNode);
   newNode.click(function(){
     game_start(socket_id);
   });
+  return(newNode);
+
 }
 
 /* Generate the invited button */
