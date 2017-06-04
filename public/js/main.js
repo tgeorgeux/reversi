@@ -15,7 +15,7 @@ function getURLParameters(whichParam)
 
 var username = getURLParameters('username');
 if('undefined' == typeof username || !username) {
-  username = 'Anonymous_'+math.random();
+  username = 'Anonymous_'+Math.random();
 }
 
 var chat_room = getURLParameters('game_id');
