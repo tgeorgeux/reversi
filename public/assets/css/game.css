@@ -1,0 +1,32 @@
+      #header-row {
+        background-color: #183B6E;
+      }
+      table#game_board {
+        background-color: #183B6E;
+        margin: auto;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #FFD300;
+      }
+
+    table#game_board td{
+        background-color: #183B6E;
+        width: 64px;
+        height: 64px;
+        padding: 5px;
+        margin: auto;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #FFD300;
+      }
+      
+      #header-text {
+        color: #FFD300;
+      }
+
+      #messages p{
+          margin: 0px;
+
+      }
+    
+       
