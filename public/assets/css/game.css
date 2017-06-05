@@ -11,8 +11,6 @@
 
     table#game_board td{
         background-color: #183B6E;
-        width: 64px;
-        height: 64px;
         padding: 5px;
         margin: auto;
         border-style: solid;
@@ -29,4 +27,7 @@
 
       }
     
-       
+    td.hovered_over:hover{
+      background: url('../images/hover.gif'), rgb(255,0,0);
+      background-size: 100% 100%;
+    }
