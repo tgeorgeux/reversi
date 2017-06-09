@@ -316,6 +316,7 @@ socket.on('game_update',function(payload){
     }
 
 $('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3>');
+$('#my_color').append('<h4>It is '+payload.game.whose_turn+'\'s turn</h4>');
 
     /** Animate changes to the board */
     var blackSum = 0;
@@ -364,9 +365,12 @@ $('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3>');
           else {
             $('#'+row+'_'+col).html('<img src="assets/images/error.gif" alt="error square"/>');              
           }
-          /** Set up interactivity */
-          $('#'+row+'_'+col).off('click');
-          if(board[row][col] == ' '){
+        }
+        /** Set up interactivity */
+        $('#'+row+'_'+col).off('click');
+        $('#'+row+'_'+col).removeClass('hovered_over');      
+        if(payload.game.whose_turn === my_color){
+          if(payload.game.legal_moves[row][col] === my_color.substr(0,1)){
             $('#'+row+'_'+col).addClass('hovered_over');
             $('#'+row+'_'+col).click(function(r,c){
               return function(){
@@ -378,9 +382,6 @@ $('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3>');
                 socket.emit('play_token', payload);
               };
             }(row,col)); 
-          }
-          else{
-            $('#'+row+'_'+col).removeClass('hovered_over');         
           }
         }
       }
