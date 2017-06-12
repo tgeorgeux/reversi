@@ -720,7 +720,7 @@ function check_line_match(who,deltaRow,deltaCol,r,c,board){
   if( (c+deltaCol < 0) || (c+deltaCol > 7) ){
     return false;
   }
-  /* return check_line_match(who,deltaRow,deltaCol,r+deltaRow,c+deltaCol,board); */
+  return check_line_match(who,deltaRow,deltaCol,r+deltaRow,c+deltaCol,board);
 }
 
 /** Function to check if a move is valid and return True or False 
