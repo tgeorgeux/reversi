@@ -317,19 +317,19 @@ socket.on('game_update',function(payload){
     }
 
 $('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3>');
-$('#my_color').append('<h4>It is '+payload.game.whose_turn+'\'s turn. Turn timer: <span id="elapsed"></span></h4>');
+$('#my_color').append('<h4>It is '+payload.game.whose_turn+'\'s turn. Turn timer - <span id="elapsed"></span></h4>');
 clearInterval(interval_timer);
-interval_timer= setInterval(function(last_time){
+interval_timer= setInterval(function(last_move_time){
   return function(){
     /** Do the work of updating the UI */
-    var d = Date();
-    var ellapsedMilli = d.getTime() - last_time;
-    var minutes = Math.floor(ellapsedMilli / (60 * 1000));
-    var seconds = Math.floor((ellapsedMilli % (60 * 1000)) * 1000);
+    var d = new Date();
+    var elapsedMilli = d.getTime() - last_move_time;
+    var minutes = Math.floor(elapsedMilli / (60 * 1000));
+		var seconds = Math.floor((elapsedMilli % (60 * 1000))/ 1000);
     if(seconds < 10){
       $('#elapsed').html(minutes+':0'+seconds);
     }
-      $('#elapsed').html(minutes+':'+seconds);
+    $('#elapsed').html(minutes+':'+seconds);
     
   }}(payload.game.last_move_time)
   , 1000)

@@ -701,7 +701,7 @@ function create_new_game() {
 
   new_game.legal_moves = calculate_valid_moves('b',new_game.board);
   console.log('legal moves available '+JSON.stringify(new_game.legal_moves));
-  return (new_game);
+  return new_game;
 
 }
 /** check if there is a color 'who' starting at (r,c)  or anywhere further
